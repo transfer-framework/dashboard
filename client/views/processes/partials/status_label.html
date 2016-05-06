@@ -1,0 +1,15 @@
+<template name="process_status_label">
+    {{# if equals status 3 }}
+        <span class="label label-danger">Failed</span>
+    {{else}}
+        {{# if equals status 2 }}
+            <span class="label label-success">Finished</span>
+        {{else}}
+            {{# if equals status 1 }}
+                <span class="label label-info">Running</span>
+            {{else}}
+                <span class="label label-default">Scheduled</span>
+            {{/if}}
+        {{/if}}
+    {{/if}}
+</template>

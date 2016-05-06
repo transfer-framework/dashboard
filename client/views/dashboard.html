@@ -1,0 +1,122 @@
+<template name="dashboard">
+    <h4>Current processes</h4>
+
+    <div class="row">
+        {{#each currentProcesses }}
+        <div class="col-sm-6 col-md-4 col-lg-3">
+            <div class="panel panel-default current-process-panel">
+                <div class="panel-heading">
+                    <div class="panel-title pull-left">
+                        {{ manifest_name }}
+
+                        <div class="pull-right">
+                            {{> process_status_label }}
+                        </div>
+
+                        <div class="panel-body">
+                            <div class="information-block">
+                                <div class="information-label">
+                                    Progress
+                                </div>
+                                <div class="information-value">
+                                    <div class="progress">
+                                        <div class="progress-bar" role="progressbar" aria-valuenow="#{progress}" aria-valuemin="0" aria-valuemax="100" style="width: #{progress}%">
+                                            <span class="sr-only">#{progress}% Complete</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="information-block">
+                                        <div class="information-label">
+                                            Started
+                                        </div>
+                                        <div class="information-value">
+                                            #{started}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="information-block">
+                                        <div class="information-label">
+                                            Time elapsed
+                                        </div>
+                                        <div class="information-value">
+                                            {{ counter started finished }}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <a class="detail-link" href="processes/{{ _id }}">View details &raquo;</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {{/each}}
+    </div>
+
+    <div class="panel panel-default">
+
+        <div class="panel-heading">
+            <div class="panel-title">
+                Last 10 finished processes
+            </div>
+        </div>
+
+        <div class="panel-body">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Manifest name</th>
+                        <th>Scheduled</th>
+                        <th>Started / Finished</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{#each lastProcesses }}
+                    <tr>
+                        <td>
+                            <a href="processes/{{ _id }}">
+                                <h4>{{ manifest_name }}</h4>
+                            </a>
+                        </td>
+                        <td>
+                            {{#if scheduled }}
+                                {{localizedDateAndTime scheduled}}
+                            {{else}}
+                                <em>No schedule date</em>
+                            {{/if}}
+                        </td>
+                        <td>
+                            {{#if started }}
+                                {{localizedDateAndTime started}}
+                            {{else}}
+                                <em>Not started</em>
+                            {{/if}}
+
+                            <br />
+
+                            {{#if finished }}
+                                {{localizedDateAndTime finished}}
+                            {{else}}
+                                {{#if started}}
+                                <em>Still running</em>
+                                {{/if}}
+                            {{/if}}
+                        </td>
+                        <td>
+                            {{> process_status_label }}
+                        </td>
+                    </tr>
+                    {{/each}}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</template>

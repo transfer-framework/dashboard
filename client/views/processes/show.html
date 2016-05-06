@@ -1,0 +1,122 @@
+<template name="processShow">
+
+    <div class="process-status">
+        <div class="panel">
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h2>{{manifest_name}}</h2>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3">
+                        <h5>Procedure status</h5>
+
+                        <div class="progress">
+                            <div class="progress-bar" role="progressbar" aria-valuenow="{{progress}}" aria-valuemin="0" aria-valuemax="100" style="width: {{progress}}%">
+                                <span class="sr-only">{{progress}}% Complete</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-2 col-md-offset-1">
+                        <h2>{{>process_status_label}}</h2>
+                        <h5>Status</h5>
+                    </div>
+                    <div class="col-md-2">
+                        <h2 class="elapsed-time" title="{{started}}" data-started="{{started}}">
+                            {{ counter started finished }}
+                        </h2>
+                        <h5>Time elapsed</h5>
+                    </div>
+                    <div class="col-md-2">
+                        <h2>{{average_memory_usage}} MB</h2>
+                        <h5>Avg. memory usage</h5>
+                    </div>
+                    <div class="col-md-2">
+                        <h2>{{peak_memory_usage}} MB</h2>
+                        <h5>Peak memory usage</h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {{#if not_empty error_buffer}}
+    <div class="panel panel-danger">
+        <div class="panel-heading">
+            <div class="panel-title">
+                Process failed prematurely
+            </div>
+        </div>
+        <div class="panel-body">
+            <pre class="simple">{{error_buffer}}</pre>
+        </div>
+    </div>
+    {{/if}}
+
+    <div class="process-details">
+
+        <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+
+            <div class="panel panel-default log-panel">
+                <div class="panel-heading" id="heading-2" role="tab">
+                    <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapse-2" aria-expanded="false" aria-controls="collapse-2">
+                            Logs
+                        </a>
+                    </h4>
+                </div>
+                <div class="panel-collapse collapse in" id="colapse-2" role="tabpanel" aria-labelledby="heading-2">
+                    <div class="panel-body">
+
+                        <div class="row toolbar">
+                            <div class="col-md-5 col-sm-12 sort-column">
+                                <div class="row">
+                                    <div class="col-md-3 col-sm-12 col-lg-2">
+                                        <div class="column-label">
+                                            Sorting
+                                        </div>
+                                    </div>
+                                    <div class="col-md-9 col-sm-12 col-lg-10">
+                                        <div class="btn-group btn-group-justified sort-controls">
+                                            <a class="btn btn-default" data-direction="1">Ascending</a>
+                                            <a class="btn btn-default active" data-direction="-1">Descending</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-7 filter-column col-lg-6 col-lg-offset-1">
+                                <div class="row">
+                                    <div class="col-md-2 col-lg-1">
+                                        <div class="column-label">
+                                            Filter
+                                        </div>
+                                    </div>
+                                    <div class="col-md-10 col-lg-11">
+                                        <input class="form-control filter-control col-sm-12" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <ul class="list-group">
+                            {{#each logs _id }}
+                                <li class="list-group-item">
+                                    <div class="row">
+                                        <div class="col-lg-9 col-sm-8 message">{{message}}</div>
+                                        <div class="col-lg-1 col-sm-1 level text-right">
+                                            <strong>{{level_name}}</strong>
+                                        </div>
+                                        <div class="col-lg-2 col-sm-3 created text-right">{{created}}</div>
+                                    </div>
+                                </li>
+                            {{/each}}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>
