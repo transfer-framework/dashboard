@@ -1,0 +1,62 @@
+<template name="processIndex">
+
+    <div class="panel panel-default">
+
+        <div class="panel-heading">
+            <div class="panel-title">Processes</div>
+        </div>
+
+        <div class="panel-body">
+
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>Manifest name</th>
+                    <th>Scheduled</th>
+                    <th>Started / Finished</th>
+                    <th>Status</th>
+                </tr>
+                </thead>
+                <tbody>
+                {{#each this }}
+                <tr>
+                    <td>
+                        <a href="processes/{{ _id }}">
+                            <h4>{{ manifest_name }}</h4>
+                        </a>
+                    </td>
+                    <td>
+                        {{#if scheduled }}
+                            {{localizedDateAndTime scheduled}}
+                        {{else}}
+                            <em>No schedule date</em>
+                        {{/if}}
+                    </td>
+                    <td>
+                        {{#if started }}
+                            {{localizedDateAndTime started}}
+                        {{else}}
+                            <em>Not started</em>
+                        {{/if}}
+
+                        <br />
+
+                        {{#if finished }}
+                            {{localizedDateAndTime finished}}
+                        {{else}}
+                            {{#if started}}
+                               <em>Still running</em>
+                            {{/if}}
+                        {{/if}}
+                    </td>
+                    <td>
+                        {{> process_status_label }}
+                    </td>
+                </tr>
+                {{/each}}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</template>

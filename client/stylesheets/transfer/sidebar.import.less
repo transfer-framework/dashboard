@@ -1,0 +1,41 @@
+.sidebar {
+  background-color: @brand-inverse;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  right: auto;
+  width: 70px;
+  overflow: hidden;
+
+  .sidebar-header .navbar-inverse {
+    background-color: darken(@brand-inverse, 5%);
+    border-color: darken(@brand-inverse, 7%);
+  }
+
+  .sidebar-menu {
+
+    .nav > li > a {
+      color: #fff;
+      background-color: darken(@brand-inverse, 7%);
+      text-align: center;
+      padding: 10px 0;
+
+      .fa {
+        color: @text-color-inverse;
+      }
+
+      &:hover {
+        .fa {
+          color: #fff;
+        }
+      }
+
+    }
+
+    .nav-stacked > li + li {
+      margin-top: 10px;
+    }
+
+  }
+
+}
