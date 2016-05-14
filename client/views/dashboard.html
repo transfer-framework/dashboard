@@ -12,48 +12,48 @@
                         <div class="pull-right">
                             {{> process_status_label }}
                         </div>
+                    </div>
+                </div>
 
-                        <div class="panel-body">
-                            <div class="information-block">
-                                <div class="information-label">
-                                    Progress
-                                </div>
-                                <div class="information-value">
-                                    <div class="progress">
-                                        <div class="progress-bar" role="progressbar" aria-valuenow="#{progress}" aria-valuemin="0" aria-valuemax="100" style="width: #{progress}%">
-                                            <span class="sr-only">#{progress}% Complete</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="information-block">
-                                        <div class="information-label">
-                                            Started
-                                        </div>
-                                        <div class="information-value">
-                                            #{started}
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="information-block">
-                                        <div class="information-label">
-                                            Time elapsed
-                                        </div>
-                                        <div class="information-value">
-                                            {{ counter started finished }}
-                                        </div>
-                                    </div>
+                <div class="panel-body">
+                    <div class="information-block">
+                        <div class="information-label">
+                            Progress
+                        </div>
+                        <div class="information-value">
+                            <div class="progress">
+                                <div class="progress-bar" role="progressbar" aria-valuenow="#{progress}" aria-valuemin="0" aria-valuemax="100" style="width: #{progress}%">
+                                    <span class="sr-only">#{progress}% Complete</span>
                                 </div>
                             </div>
                         </div>
+                    </div>
 
-                        <a class="detail-link" href="processes/{{ _id }}">View details &raquo;</a>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="information-block">
+                                <div class="information-label">
+                                    Started
+                                </div>
+                                <div class="information-value">
+                                    {{ localizedDateAndTime started }}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="information-block">
+                                <div class="information-label">
+                                    Time elapsed
+                                </div>
+                                <div class="information-value">
+                                    {{ counter started finished }}
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
+
+                <a class="detail-link" href="processes/{{ _id }}">View details &raquo;</a>
             </div>
         </div>
         {{/each}}
